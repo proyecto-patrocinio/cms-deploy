@@ -10,15 +10,17 @@ docker swarm init
 ```
 
 ## 2) Configurar Variables de Entorno
-Configure el archivo `.env` y ejecute el siguiente comando para establecer las variables de entorno:
+Configure el archivo `.env` y los archivos en el directorio `resources`. Luego ejecute el siguiente comando para establecer las variables de entorno:
 ```bash
 . dotenv.sh
+# Seleccione la opción 1
 ```
 
 ## 3) Configurar Secrets
 Configure el archivo `.secrets` y ejecute el siguiente comando para establecer los secretos:
 ```bash
-. dotsecrets.sh
+dotsecrets.sh
+# Seleccione la opción 1
 ```
 
 ## 4) Levantar Docker Swarm
