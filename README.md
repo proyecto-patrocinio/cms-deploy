@@ -19,7 +19,7 @@ Configure el archivo `.env` y los archivos en el directorio `resources`. Luego e
 ## 3) Configurar Secrets
 Configure el archivo `.secrets` y ejecute el siguiente comando para establecer los secretos:
 ```bash
-dotsecrets.sh
+. dotsecrets.sh
 # Seleccione la opción 1
 ```
 
