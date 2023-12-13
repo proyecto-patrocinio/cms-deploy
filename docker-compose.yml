@@ -2,8 +2,7 @@ version: "3.8"
 
 services:
   backend-wsgi:
-    restart: on-failure
-    restart_limit: 10
+    restart: always
     image: ${CMS_BACKEND_IMAGE}
     volumes:
       - django_static_volume:/home/app/cms/django_static/
@@ -35,8 +34,7 @@ services:
       replicas: 1
 
   backend-asgi:
-    restart: on-failure
-    restart_limit: 10
+    restart: always
     image: ${CMS_BACKEND_IMAGE}
     command: daphne -b 0.0.0.0 -p 8001 api_patrocinio.asgi:application
     expose:
@@ -66,8 +64,7 @@ services:
       replicas: 1
 
   db:
-    restart: on-failure
-    restart_limit: 10
+    restart: always
     image: postgres:15-alpine 
     env_file: ${CMS_POSTGRES_ENV_FILE}
     environment:
@@ -85,8 +82,7 @@ services:
       replicas: 1
 
   nginx:
-    restart: on-failure
-    restart_limit: 10
+    restart: always
     image: ${CMS_FRONTEND_IMAGE}
     ports:
         - ${CMS_PROXY_PORT}:80
@@ -106,8 +102,7 @@ services:
       replicas: 1
 
   redis:
-    restart: on-failure
-    restart_limit: 10
+    restart: always
     image: "redis:alpine"
     container_name: redis_server
     expose:
