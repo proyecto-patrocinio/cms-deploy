@@ -6,6 +6,19 @@ services:
     volumes:
       - django_static_volume:/home/app/cms/django_static/
     command: gunicorn api_patrocinio.wsgi:application --bind 0.0.0.0:8000 --workers 4 --threads 4
+    configs:
+      - source: email_confirmation_message_template
+        target: /home/app/cms/templates/account/email/email_confirmation_message.html
+      - source: email_confirmation_signup_message_template
+        target: /home/app/cms/templates/account/email/email_confirmation_signup_message.html
+      - source: password_reset_key_message_template
+        target: /home/app/cms/templates/account/email/password_reset_key_message.html
+      - source: new_request_template
+        target: /home/app/cms/templates/notifications/new_request.html
+      - source: request_accepted_template
+        target: /home/app/cms/templates/notifications/request_accepted.html
+      - source: request_rejected_template
+        target: /home/app/cms/templates/notifications/request_rejected.html
     env_file:
       - ${CMS_BACKEND_ENV_FILE}
     environment:
@@ -44,6 +57,7 @@ services:
       - DJANGO_SUPERUSER_EMAIL=/run/secrets/django_superuser_email
     depends_on:
       - redis
+      - backend-wsgi
     hostname: appserver
     networks:
       - proyecto-patrocinio
@@ -136,6 +150,18 @@ configs:
     file: ${CMS_NGINX_CONFIG_FILE}
   frontend_env:
     file: ${CMS_FRONTEND_ENV_FILE}
+  email_confirmation_message_template:
+    file: ${CMS_TEMPLATES_ACCOUNT_PATH}/email_confirmation_message.html
+  email_confirmation_signup_message_template:
+    file: ${CMS_TEMPLATES_ACCOUNT_PATH}/email_confirmation_signup_message.html
+  password_reset_key_message_template:
+    file: ${CMS_TEMPLATES_ACCOUNT_PATH}/password_reset_key_message.html
+  new_request_template:
+    file: ${CMS_TEMPLATES_NOTIFICATION_PATH}/new_request.html
+  request_accepted_template:
+    file: ${CMS_TEMPLATES_NOTIFICATION_PATH}/request_accepted.html
+  request_rejected_template:
+    file: ${CMS_TEMPLATES_NOTIFICATION_PATH}/request_rejected.html
 
 volumes:
   postgres_data_prod:

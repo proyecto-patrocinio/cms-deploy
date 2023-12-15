@@ -2,9 +2,9 @@
 Este proyecto utiliza Docker Swarm para orquestar los contenedores necesarios para la plataforma.
 
 
-## Prerequisios
+## Prerequisitos
 - Tener instalado Docker y Docker compose. (Docker engine > 1.13.0+)
-- Tener pulleadas las imagenes referenciadas en el archivo `./env`
+- Tener pulleadas las imágenes referenciadas en el archivo `./env`
 
 
 A continuación, se detallan los pasos para desplegar la plataforma. Desde el host del nodo manager, siga estos pasos en una terminal "bash"...
@@ -15,8 +15,11 @@ Ejecute el siguiente comando para crear el nodo manager:
 docker swarm init
 ```
 
-## 2) Configurar Variables de Entorno
-Configure el archivo `.env` y los archivos en el directorio `resources`. Luego ejecute el siguiente comando para establecer las variables de entorno:
+## 2) Archivos de Configuración y Templates
+Actualice correctamente los archivos de configuración y entorno del sistema CMS ubicados en el directorio `./resources/`. Además, puede personalizar las plantillas utilizadas en el envío de correos electrónicos modificando los archivos en el directorio `./resources/templates/`.
+
+## 3) Configurar Variables de Entorno
+Verifique los valores de las variables en el archivo .env que serán utilizadas por el Compose. Luego, ejecute el siguiente comando para establecer las variables de entorno:
 ```bash
 . dotenv.sh
 # Seleccione la opción 1
@@ -41,3 +44,5 @@ docker stack rm  case-management-system
 
 **Nota**: Si desea agregar nodos worker, se recomienda revisar la siguiente documentación:
 [Documentacion de Swarm - Network](https://docs.docker.com/engine/swarm/networking/)
+
+**ERROR "is a directory"**: Si le ocurre este error, recargue la consola ejecutando `source ~/.bashrc` y vuelva al paso 3.
