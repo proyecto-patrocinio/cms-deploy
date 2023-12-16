@@ -5,6 +5,7 @@ services:
     image: ${CMS_BACKEND_IMAGE}
     volumes:
       - django_static_volume:/home/app/cms/django_static/
+      - files_backend_volume:${ATTACHMENT_BASE_DIRECTORY}
     command: gunicorn api_patrocinio.wsgi:application --bind 0.0.0.0:8000 --workers 4 --threads 4
     configs:
       - source: email_confirmation_message_template
@@ -27,7 +28,8 @@ services:
       - EMAIL_HOST_PASSWORD=/run/secrets/email_host_password
       - DJANGO_SUPERUSER_USERNAME=/run/secrets/django_superuser_username
       - DJANGO_SUPERUSER_PASSWORD=/run/secrets/django_superuser_password
-      - DJANGO_SUPERUSER_EMAIL=/run/secrets/django_superuser_email
+      - DJANGO_SUPERUSER_EMAIL=/run/secrets/
+      - ATTACHMENT_BASE_DIRECTORY=${ATTACHMENT_BASE_DIRECTORY}
     depends_on:
       - db
     hostname: appserver
@@ -166,6 +168,7 @@ configs:
 volumes:
   postgres_data_prod:
   django_static_volume:
+  files_backend_volume:
 
 
 networks:

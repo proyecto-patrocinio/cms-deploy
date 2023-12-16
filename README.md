@@ -35,11 +35,11 @@ Configure el archivo `.secrets` y ejecute el siguiente comando para establecer l
 ## 4) Levantar Docker Swarm
 Ejecute el siguiente comando para iniciar el proyecto:
 ```bash
-docker stack deploy -c docker-compose.yml case-management-system
+docker stack deploy -c docker-compose.yml cms
 ```
 Para eliminar el stack de dokcer ejecute:
 ```bash
-docker stack rm  case-management-system
+docker stack rm  cms
 ```
 
 **Nota**: Si desea agregar nodos worker, se recomienda revisar la siguiente documentación:
