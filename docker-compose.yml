@@ -22,25 +22,11 @@ services:
         target: /home/app/cms/templates/notifications/request_rejected.html
     env_file:
       - ${CMS_BACKEND_ENV_FILE}
-    environment:
-      - SECRET_KEY=/run/secrets/secret_key
-      - SQL_PASSWORD=/run/secrets/postgres_password
-      - EMAIL_HOST_PASSWORD=/run/secrets/email_host_password
-      - DJANGO_SUPERUSER_USERNAME=/run/secrets/django_superuser_username
-      - DJANGO_SUPERUSER_PASSWORD=/run/secrets/django_superuser_password
-      - DJANGO_SUPERUSER_EMAIL=/run/secrets/django_superuser_email
     depends_on:
       - db
     hostname: appserver
     networks:
       - proyecto-patrocinio
-    secrets:
-      - secret_key
-      - postgres_password
-      - email_host_password
-      - django_superuser_username
-      - django_superuser_password
-      - django_superuser_email
     deploy:
       replicas: 1
 
@@ -49,41 +35,23 @@ services:
     command: daphne -b 0.0.0.0 -p 8001 api_patrocinio.asgi:application
     env_file:
       - ${CMS_BACKEND_ENV_FILE}
-    environment:
-      - SECRET_KEY=/run/secrets/secret_key
-      - SQL_PASSWORD=/run/secrets/postgres_password
-      - EMAIL_HOST_PASSWORD=/run/secrets/email_host_password
-      - DJANGO_SUPERUSER_USERNAME=/run/secrets/django_superuser_username
-      - DJANGO_SUPERUSER_PASSWORD=/run/secrets/django_superuser_password
-      - DJANGO_SUPERUSER_EMAIL=/run/secrets/django_superuser_email
     depends_on:
       - redis
       - backend-wsgi
     hostname: appserver
     networks:
       - proyecto-patrocinio
-    secrets:
-      - secret_key
-      - postgres_password
-      - email_host_password
-      - django_superuser_username
-      - django_superuser_password
-      - django_superuser_email
     deploy:
       replicas: 1
 
   db:
     image: "postgres:15-alpine"
     env_file: ${CMS_POSTGRES_ENV_FILE}
-    environment:
-      - POSTGRES_PASSWORD=/run/secrets/postgres_password
     volumes:
       - postgres_data_prod:/var/lib/postgresql/data
     hostname: databaseserver
     networks:
       - proyecto-patrocinio
-    secrets:
-      - postgres_password
     deploy:
       replicas: 1
 
@@ -124,26 +92,6 @@ services:
       - proyecto-patrocinio
     deploy:
       replicas: 1
-
-secrets:
-  secret_key:
-    external: true
-    name: secret_key
-  postgres_password:
-    external: true
-    name: postgres_password
-  email_host_password:
-    external: true
-    name: email_host_password
-  django_superuser_username:
-    external: true
-    name: django_superuser_username
-  django_superuser_password:
-    external: true
-    name: django_superuser_password
-  django_superuser_email:
-    external: true
-    name: django_superuser_email
 
 
 configs:
