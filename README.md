@@ -25,13 +25,6 @@ Verifique los valores de las variables en el archivo .env que serán utilizadas 
 # Seleccione la opción 1
 ```
 
-## 3) Configurar Secrets
-Configure el archivo `.secrets` y ejecute el siguiente comando para establecer los secretos:
-```bash
-. dotsecrets.sh
-# Seleccione la opción 1
-```
-
 ## 4) Levantar Docker Swarm
 Ejecute el siguiente comando para iniciar el proyecto:
 ```bash
