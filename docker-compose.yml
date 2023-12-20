@@ -20,6 +20,8 @@ services:
         target: /home/app/cms/templates/notifications/request_accepted.html
       - source: request_rejected_template
         target: /home/app/cms/templates/notifications/request_rejected.html
+      - source: terms_and_policies_template
+        target: /home/app/cms/terms_and_policies/terms_and_policies.md
     env_file:
       - ${CMS_BACKEND_ENV_FILE}
     depends_on:
@@ -111,6 +113,8 @@ configs:
     file: ${CMS_TEMPLATES_NOTIFICATION_PATH}/request_accepted.html
   request_rejected_template:
     file: ${CMS_TEMPLATES_NOTIFICATION_PATH}/request_rejected.html
+  terms_and_policies_template:
+    file: ${CMS_TERMS_AND_POLICIES_FILE}
 
 volumes:
   postgres_data_prod:
