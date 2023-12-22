@@ -1,4 +1,4 @@
-# Despliegue - Case Managment System
+# Despliegue - Case Management System
 Este proyecto utiliza Docker Swarm para orquestar los contenedores necesarios para la plataforma.
 
 
