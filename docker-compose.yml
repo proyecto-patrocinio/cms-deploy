@@ -62,6 +62,8 @@ services:
     configs:
       - source: frontend_env
         target: /app/.env
+      - source: logo
+        target: /app/public/favicon.ico
     depends_on: 
         - backend-wsgi
         - backend-asgi
@@ -101,6 +103,8 @@ configs:
     file: ${CMS_NGINX_CONFIG_FILE}
   frontend_env:
     file: ${CMS_FRONTEND_ENV_FILE}
+  logo:
+    file: ${CMS_LOGO_FILE}
   email_confirmation_message_template:
     file: ${CMS_TEMPLATES_ACCOUNT_PATH}/email_confirmation_message.html
   email_confirmation_signup_message_template:
