@@ -6,7 +6,7 @@ services:
     volumes:
       - django_static_volume:/home/app/cms/django_static/
       - files_backend_volume:/opt/patrocinio/
-    command: gunicorn api_patrocinio.wsgi:application --bind 0.0.0.0:8000 --workers 4 --threads 4
+    command: gunicorn api_patrocinio.wsgi:application --bind 0.0.0.0:8000 --workers 4
     configs:
       - source: email_confirmation_message_template
         target: /home/app/cms/templates/account/email/email_confirmation_message.html
